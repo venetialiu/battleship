@@ -1,8 +1,7 @@
 package cell;
 
 public enum CellStatus {
-    EMPTY,
-    SHIP,
+    UNGUESSED,
     HIT,
     MISS
 }

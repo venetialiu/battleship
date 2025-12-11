@@ -5,7 +5,7 @@ public class Cell {
     private boolean hasShip;
 
     public Cell() {
-        this.status = CellStatus.EMPTY;
+        this.status = CellStatus.UNGUESSED;
         this.hasShip = false;
     }
 
@@ -21,8 +21,20 @@ public class Cell {
         return hasShip;
     }
 
-    public void setHasShip(boolean hasShip) {
+    public void setShip(boolean hasShip) {
         this.hasShip = hasShip;
+    }
+
+    public boolean isUnguessed(){
+        return status == status.UNGUESSED;
+    }
+
+    public void markHit(){
+        this.status = status.HIT;
+    }
+
+    public void markMiss(){
+        this.status = status.MISS;
     }
 }
 

@@ -19,6 +19,13 @@ public abstract class Grid {
     public Cell[][] getCells() {
         return cells;
     }
+    public boolean inBounds(int row, int col) {
+        return row >= 0 && row < SIZE && col >= 0 && col < SIZE;
+    }
+
+    public Cell getCell(int row, int col) {
+        return cells[row][col];
+    }
 
     public abstract void printGrid();
 }

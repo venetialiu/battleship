@@ -69,7 +69,6 @@ public class BattleshipGame {
 
             // Computer turn
             System.out.println("\n=== Computer's turn ===");
-            System.out.println("Press Enter to continue...");
             new java.util.Scanner(System.in).nextLine();
 
             int[] move = computer.chooseMove();

@@ -27,9 +27,10 @@ public abstract class OwnGrid extends Grid {
         return true;
     }
 
-    public void placeShip(Ship ship, int row, int col, Orientation o) {
+    public boolean placeShip(Ship ship, int row, int col, Orientation o) {
         if (!canPlaceShip(ship, row, col, o)) {
-            throw new IllegalArgumentException("Cannot place ship here");
+            System.out.println("Cannot place ship here. Try again.");
+            return false;
         }
         ship.setPosition(row, col);
         ship.setOrientation(o);
@@ -41,37 +42,59 @@ public abstract class OwnGrid extends Grid {
             int c = col + (o== Orientation.HORIZONTAL ? i : 0);
             cells[r][c].setShip(true);
         }
+        return true;
     }
 
     /** Applies a shot from the opponent. Returns true if hit. */
     public boolean applyShot(int row, int col) {
         if (!inBounds(row, col)) {
-            throw new IllegalArgumentException("Shot out of bounds");
+            System.out.println("Shot out of bounds! Try again.");
+            return false;
         }
 
         Cell cell = cells[row][col];
         if (!cell.isUnguessed()) {
             // already shot here
-            return cell.getStatus() == CellStatus.HIT;
+            System.out.println("Cell already shot! Try again.");
+            return false;
         }
 
         if (cell.hasShip()) {
             cell.markHit();
-            // you can later walk ships to call registerHit() if needed
             return true;
         } else {
             cell.markMiss();
             return false;
         }
+
+       
     }
+
+    public boolean isValidShot(int row, int col) {
+        if (!inBounds(row, col)) return false;
+        return cells[row][col].isUnguessed();
+    }
+
+    // check if all ships 
+    public boolean allShipsSunk() {
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                if (cells[r][c].hasShip() && cells[r][c].isUnguessed()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     @Override
     public void printGrid() {
         // typically: show ships + hits/misses for your own board
         System.out.print("  ");
-        for (int c = 0; c < SIZE; c++) System.out.print((c + 1) + " ");
+        for (int c = 0; c < SIZE; c++) System.out.print(c + " ");
         System.out.println();
-        char[] letters = "ABCDEFGHIJ".toCharArray();
+        char[] letters = "0123456789".toCharArray();
 
         for (int r = 0; r < SIZE; r++) {
             System.out.print(letters[r] + " ");

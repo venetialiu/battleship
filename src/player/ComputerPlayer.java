@@ -55,11 +55,15 @@ public class ComputerPlayer extends Player {
     }
 
     /**
-     * Chooses a move for the computer using the ComputerGuessGrid's targeting logic.
+     * Chooses a move for the computer using the ComputerGuessGrids targeting logic
      * @return int array with [row, col]
      */
     public int[] chooseMove() {
         return getComputerGuessGrid().pickValidTarget();
+    }
+
+    public void noteShotResult(int row, int col, boolean hit) {
+        getComputerGuessGrid().noteShotResult(row, col, hit);
     }
 }
 

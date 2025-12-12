@@ -49,10 +49,11 @@ public class HumanPlayer extends Player {
                 // Create ship and try to place
                 Ship ship = new Ship(length);
                 if (getHumanOwnGrid().canPlaceShip(ship, row, col, orientation)) {
-                    getHumanOwnGrid().placeShip(ship, row, col, orientation);
-                    System.out.println("Ship placed successfully!");
-                    getHumanOwnGrid().printGrid();
-                    placed = true;
+                    if (getHumanOwnGrid().placeShip(ship, row, col, orientation)) {
+                        placed = true;
+                        System.out.println("Ship placed successfully!");
+                        getHumanOwnGrid().printGrid();
+                    }
                 } else {
                     showErrorMessage("Cannot place ship there. Out of bounds or overlapping. Try again.");
                 }
@@ -132,7 +133,7 @@ public class HumanPlayer extends Player {
      * @return Orientation enum, or null if invalid
      */
     private Orientation readOrientation() {
-        System.out.println("Enter orientation (HORIZONTAL/VERTICAL):");
+        System.out.println("Enter orientation ( (H)ORIZONTAL / (V)ERTICAL ):");
         String input = scanner.nextLine().trim().toUpperCase();
         if (input.equals("HORIZONTAL") || input.equals("H")) {
             return Orientation.HORIZONTAL;

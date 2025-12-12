@@ -1,9 +1,8 @@
 package game;
 
 import grid.ComputerGuessGrid;
-import grid.ComputerOwnGrid;
 import grid.HumanGuessGrid;
-import grid.HumanOwnGrid;
+import grid.OwnGrid;
 
 import player.ComputerPlayer;
 import player.HumanPlayer;
@@ -17,10 +16,10 @@ public class BattleshipGame {
         System.out.println("=== Welcome to Battleship ===");
 
         HumanGuessGrid humanGuess = new HumanGuessGrid();
-        HumanOwnGrid humanOwn = new HumanOwnGrid();
+        OwnGrid humanOwn = new OwnGrid();
 
         ComputerGuessGrid compGuess = new ComputerGuessGrid();
-        ComputerOwnGrid compOwn = new ComputerOwnGrid();
+        OwnGrid compOwn = new OwnGrid();
 
         human = new HumanPlayer(humanGuess, humanOwn);
         computer = new ComputerPlayer(compGuess, compOwn);
@@ -69,6 +68,7 @@ public class BattleshipGame {
 
             // Computer turn
             System.out.println("\n=== Computer's turn ===");
+            System.out.println("Press Enter to continue...");
             new java.util.Scanner(System.in).nextLine();
 
             int[] move = computer.chooseMove();

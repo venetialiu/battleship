@@ -50,7 +50,7 @@ public class ComputerGuessGrid extends GuessGrid {
 
     /**
      * Call this after the computer fires at (row, col) and you know
-     * whether it was a hit. This updates the guess grid and, on a hit,
+     * whether it was a hit. this updates the guess grid and on a hit,
      * enqueues neighboring cells as future targets.
      */
     public void noteShotResult(int row, int col, boolean hit) {

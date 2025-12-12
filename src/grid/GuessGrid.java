@@ -8,30 +8,31 @@ public abstract class GuessGrid extends Grid {
         super();
     }
 
-    // record your guess on the opponent
-    public void recordShot(int row, int col, boolean hit) {
+    // record guess on the opponent
+    public boolean recordShot(int row, int col, boolean hit) {
         Cell cell = getCell(row, col);
         if (!cell.isUnguessed()) {
-            // you can throw or ignore; up to your design
-            throw new IllegalArgumentException("Cell already guessed");
+            // return False if cell
+            System.out.println("Cell already shot! Try again.");
+            return false;
         }
         if (hit) {
             cell.markHit();
         } else {
             cell.markMiss();
         }
+        return true;
     }
 
     @Override
     public void printGrid() {
         // generic “X/O/-” view; subclasses can override if needed
         System.out.print("  ");
-        for (int c = 0; c < SIZE; c++) System.out.print((c + 1) + " ");
+        for (int c = 0; c < SIZE; c++) System.out.print(c + " ");
         System.out.println();
-        char[] letters = "ABCDEFGHIJ".toCharArray();
 
         for (int r = 0; r < SIZE; r++) {
-            System.out.print(letters[r] + " ");
+            System.out.print(r + " ");
             for (int c = 0; c < SIZE; c++) {
                 CellStatus s = cells[r][c].getStatus();
                 char out = '-';

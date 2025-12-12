@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import grid.GuessGrid;
 import grid.HumanGuessGrid;
-import grid.HumanOwnGrid;
 import grid.OwnGrid;
 import ship.Orientation;
 import ship.Ship;
@@ -17,10 +16,6 @@ public class HumanPlayer extends Player {
     public HumanPlayer(GuessGrid guess, OwnGrid own) {
         super(guess, own);
         scanner = new Scanner(System.in);
-    }
-
-    private HumanOwnGrid getHumanOwnGrid() {
-        return (HumanOwnGrid) own;
     }
 
     private HumanGuessGrid getHumanGuessGrid() {
@@ -48,11 +43,11 @@ public class HumanPlayer extends Player {
 
                 // Create ship and try to place
                 Ship ship = new Ship(length);
-                if (getHumanOwnGrid().canPlaceShip(ship, row, col, orientation)) {
-                    if (getHumanOwnGrid().placeShip(ship, row, col, orientation)) {
+                if (own.canPlaceShip(ship, row, col, orientation)) {
+                    if (own.placeShip(ship, row, col, orientation)) {
                         placed = true;
                         System.out.println("Ship placed successfully!");
-                        getHumanOwnGrid().printGrid();
+                        own.printGrid();
                     }
                 } else {
                     showErrorMessage("Cannot place ship there. Out of bounds or overlapping. Try again.");
@@ -63,7 +58,7 @@ public class HumanPlayer extends Player {
 
     @Override
     public boolean receiveShot(int row, int col) {
-        return getHumanOwnGrid().applyShot(row, col);
+        return own.applyShot(row, col);
     }
 
     /**

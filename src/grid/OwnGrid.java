@@ -7,7 +7,7 @@ import cell.Cell;
 import cell.CellStatus;
 import java.util.ArrayList;
 
-public abstract class OwnGrid extends Grid {
+public class OwnGrid extends Grid {
 
     protected List<Ship> ships = new ArrayList<>();
 

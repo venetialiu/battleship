@@ -3,7 +3,6 @@ package player;
 import java.util.Random;
 
 import grid.ComputerGuessGrid;
-import grid.ComputerOwnGrid;
 import grid.GuessGrid;
 import grid.OwnGrid;
 import ship.Orientation;
@@ -17,11 +16,6 @@ public class ComputerPlayer extends Player {
     public ComputerPlayer(GuessGrid guess, OwnGrid own) {
         super(guess, own);
         random = new Random();
-    }
-
-    // Helper methods to avoid repeated casting
-    private ComputerOwnGrid getComputerOwnGrid() {
-        return (ComputerOwnGrid) own;
     }
 
     private ComputerGuessGrid getComputerGuessGrid() {
@@ -40,8 +34,8 @@ public class ComputerPlayer extends Player {
                     : Orientation.VERTICAL;
 
                 Ship ship = new Ship(length);
-                if (getComputerOwnGrid().canPlaceShip(ship, row, col, orientation)) {
-                    getComputerOwnGrid().placeShip(ship, row, col, orientation);
+                if (own.canPlaceShip(ship, row, col, orientation)) {
+                    own.placeShip(ship, row, col, orientation);
                     placed = true;
                 }
                 // If invalid, loop tries again with new random values
@@ -51,7 +45,7 @@ public class ComputerPlayer extends Player {
 
     @Override
     public boolean receiveShot(int row, int col) {
-        return getComputerOwnGrid().applyShot(row, col);
+        return own.applyShot(row, col);
     }
 
     /**
